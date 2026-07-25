@@ -185,12 +185,8 @@ export const routeTemplates: RouteTemplate[] = [
   },
 ];
 
-const airlines = [
-  { name: 'Skyline Airways', prefix: 'SK' },
-  { name: 'Britannia Air', prefix: 'BA' },
-  { name: 'Atlantic Express', prefix: 'AX' },
-  { name: 'Northwind', prefix: 'NW' },
-];
+const AIRLINE_NAME = 'Skyline Airways';
+const FLIGHT_PREFIX = 'SK';
 
 const aircraftTypes = [
   'Airbus A320neo',
@@ -198,6 +194,12 @@ const aircraftTypes = [
   'Airbus A350-1000',
   'Boeing 777-300ER',
   'Airbus A321',
+];
+
+const cabins = [
+  { name: 'Economy', multiplier: 1 },
+  { name: 'Premium Economy', multiplier: 1.7 },
+  { name: 'Business', multiplier: 2.9 },
 ];
 
 /** Timetable window: every route flies every day for this many days from today. */
@@ -228,18 +230,19 @@ const buildTimetable = (): Flight[] => {
       route.slots.forEach(({ departureTime, arrivalTime }) => {
         const id = `${route.originCode}-${route.destinationCode}-${departureDate}-${departureTime.replace(':', '')}`;
         const seed = hash(id);
-        const airline = airlines[seed % airlines.length];
+        const cabin = cabins[seed % cabins.length];
         built.push({
           id,
-          airline: airline.name,
-          flightNumber: `${airline.prefix}${100 + (seed % 800)}`,
+          airline: AIRLINE_NAME,
+          flightNumber: `${FLIGHT_PREFIX}${100 + (seed % 800)}`,
+          cabin: cabin.name,
           originCode: route.originCode,
           destinationCode: route.destinationCode,
           departureDate,
           departureTime,
           arrivalTime,
           duration: route.duration,
-          price: route.basePrice + ((seed * 13) % 90),
+          price: Math.round((route.basePrice + ((seed * 13) % 90)) * cabin.multiplier),
           aircraft: aircraftTypes[seed % aircraftTypes.length],
         });
       });

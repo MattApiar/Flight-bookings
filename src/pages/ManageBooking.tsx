@@ -60,6 +60,7 @@ export default function ManageBooking() {
   return (
     <div className="page">
       <section className="hero hero--compact">
+        <span className="eyebrow">My Skyline</span>
         <h1>Your bookings, {currentUser.name.split(' ')[0]}</h1>
         <p>
           {upcomingCount} upcoming trip{upcomingCount === 1 ? '' : 's'} on this account &middot;{' '}

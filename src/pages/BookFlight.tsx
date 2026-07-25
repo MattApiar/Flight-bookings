@@ -89,10 +89,11 @@ export default function BookFlight() {
   return (
     <div className="page">
       <section className="hero">
+        <span className="eyebrow">Skyline Airways</span>
         <h1>Where would you like to fly?</h1>
         <p>
-          Search our mock timetable and book in seconds &mdash; you&rsquo;re signed in as{' '}
-          {currentUser.name}.
+          Signed in as {currentUser.name}. Choose your route and cabin, and we&rsquo;ll take care of
+          the rest.
         </p>
       </section>
 

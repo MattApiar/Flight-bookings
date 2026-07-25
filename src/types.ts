@@ -9,6 +9,7 @@ export interface Flight {
   id: string;
   airline: string;
   flightNumber: string;
+  cabin: string;
   originCode: string;
   destinationCode: string;
   departureDate: string;

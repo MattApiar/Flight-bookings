@@ -15,10 +15,9 @@ export default function FlightCard({ flight, passengers, onSelect, actionLabel =
   return (
     <article className={selected ? 'flight-card flight-card--selected' : 'flight-card'}>
       <div className="flight-card__airline">
-        <span className="badge">{flight.airline}</span>
-        <span className="muted">
-          {flight.flightNumber} &middot; {flight.aircraft}
-        </span>
+        <span className="badge">{flight.cabin}</span>
+        <strong className="flight-card__number">{flight.flightNumber}</strong>
+        <span className="muted">{flight.aircraft}</span>
       </div>
 
       <div className="flight-card__route">
@@ -29,7 +28,7 @@ export default function FlightCard({ flight, passengers, onSelect, actionLabel =
         <div className="flight-card__path">
           <span className="muted">{flight.duration}</span>
           <div className="flight-card__line" aria-hidden="true" />
-          <span className="muted">Direct</span>
+          <span className="muted">Non-stop</span>
         </div>
         <div className="flight-card__endpoint flight-card__endpoint--right">
           <strong>{flight.arrivalTime}</strong>
@@ -41,7 +40,7 @@ export default function FlightCard({ flight, passengers, onSelect, actionLabel =
         <div>
           <strong>&pound;{total.toLocaleString()}</strong>
           <span className="muted">
-            {passengers} passenger{passengers === 1 ? '' : 's'}
+            total for {passengers} passenger{passengers === 1 ? '' : 's'}
           </span>
         </div>
         {onSelect ? (
