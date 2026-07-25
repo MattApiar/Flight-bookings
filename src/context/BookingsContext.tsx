@@ -1,6 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import type { ReactNode } from 'react';
 import { initialBookings } from '../data/bookings';
+import { flightById } from '../data/flights';
 import type { Booking } from '../types';
 
 const STORAGE_KEY = 'flight-bookings.v1';
@@ -33,7 +34,9 @@ const loadBookings = (): Booking[] => {
     if (!raw) return initialBookings;
     const parsed: unknown = JSON.parse(raw);
     if (!Array.isArray(parsed)) return initialBookings;
-    return parsed as Booking[];
+    // Drop bookings whose flight has fallen out of the rolling timetable window.
+    const stored = (parsed as Booking[]).filter((b) => flightById(b.flightId));
+    return stored.length > 0 ? stored : initialBookings;
   } catch {
     return initialBookings;
   }

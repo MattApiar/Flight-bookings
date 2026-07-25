@@ -210,28 +210,37 @@ const isoDate = (offsetDays: number): string => {
   return date.toISOString().slice(0, 10);
 };
 
+/** Small stable hash so airline, price and aircraft stay identical for a given flight id. */
+const hash = (value: string): number => {
+  let result = 0;
+  for (let i = 0; i < value.length; i += 1) {
+    result = (result * 31 + value.charCodeAt(i)) % 100000;
+  }
+  return result;
+};
+
 const buildTimetable = (): Flight[] => {
   const built: Flight[] = [];
-  let index = 0;
 
   for (let day = 0; day < SCHEDULE_DAYS; day += 1) {
     const departureDate = isoDate(day);
     routeTemplates.forEach((route) => {
       route.slots.forEach(({ departureTime, arrivalTime }) => {
-        index += 1;
-        const airline = airlines[index % airlines.length];
+        const id = `${route.originCode}-${route.destinationCode}-${departureDate}-${departureTime.replace(':', '')}`;
+        const seed = hash(id);
+        const airline = airlines[seed % airlines.length];
         built.push({
-          id: `FL${String(index).padStart(6, '0')}`,
+          id,
           airline: airline.name,
-          flightNumber: `${airline.prefix}${100 + (index % 800)}`,
+          flightNumber: `${airline.prefix}${100 + (seed % 800)}`,
           originCode: route.originCode,
           destinationCode: route.destinationCode,
           departureDate,
           departureTime,
           arrivalTime,
           duration: route.duration,
-          price: route.basePrice + ((index * 13) % 90),
-          aircraft: aircraftTypes[index % aircraftTypes.length],
+          price: route.basePrice + ((seed * 13) % 90),
+          aircraft: aircraftTypes[seed % aircraftTypes.length],
         });
       });
     });
