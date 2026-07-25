@@ -4,7 +4,7 @@ import { initialBookings } from '../data/bookings';
 import { flightById } from '../data/flights';
 import type { Booking } from '../types';
 
-const STORAGE_KEY = 'flight-bookings.v1';
+const STORAGE_KEY = 'flight-bookings.v2';
 
 interface BookingsContextValue {
   bookings: Booking[];

@@ -5,6 +5,7 @@ import SearchForm from '../components/SearchForm';
 import type { SearchCriteria } from '../components/SearchForm';
 import { airportLabel } from '../data/airports';
 import { flights } from '../data/flights';
+import { currentUser } from '../data/user';
 import { useBookings } from '../context/BookingsContext';
 import type { Booking, Flight } from '../types';
 import { formatDate, todayIso } from '../utils/format';
@@ -38,7 +39,11 @@ export default function BookFlight() {
   const { addBooking } = useBookings();
   const [criteria, setCriteria] = useState<SearchCriteria | null>(null);
   const [selectedFlight, setSelectedFlight] = useState<Flight | null>(null);
-  const [passenger, setPassenger] = useState({ name: '', email: '', phone: '' });
+  const [passenger, setPassenger] = useState({
+    name: currentUser.name,
+    email: currentUser.email,
+    phone: currentUser.phone,
+  });
   const [confirmation, setConfirmation] = useState<Booking | null>(null);
   const [error, setError] = useState('');
 
@@ -79,14 +84,16 @@ export default function BookFlight() {
     });
     setConfirmation(booking);
     setSelectedFlight(null);
-    setPassenger({ name: '', email: '', phone: '' });
   };
 
   return (
     <div className="page">
       <section className="hero">
         <h1>Where would you like to fly?</h1>
-        <p>Search our mock timetable, pick a flight and book in seconds &mdash; no account needed.</p>
+        <p>
+          Search our mock timetable and book in seconds &mdash; you&rsquo;re signed in as{' '}
+          {currentUser.name}.
+        </p>
       </section>
 
       <SearchForm initial={defaultCriteria} onSearch={handleSearch} />

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { currentUser } from '../data/user';
 
 export default function NavBar() {
   const [open, setOpen] = useState(false);
@@ -36,6 +37,15 @@ export default function NavBar() {
           <NavLink to="/manage" className={linkClass} onClick={() => setOpen(false)}>
             Manage Booking
           </NavLink>
+          <div className="account">
+            <span className="account__avatar" aria-hidden="true">
+              {currentUser.initials}
+            </span>
+            <span className="account__text">
+              <small>Signed in as</small>
+              <strong>{currentUser.name}</strong>
+            </span>
+          </div>
         </nav>
       </div>
     </header>
