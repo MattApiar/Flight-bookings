@@ -36,7 +36,7 @@ const defaultCriteria: SearchCriteria = {
 
 export default function BookFlight() {
   const { addBooking } = useBookings();
-  const [criteria, setCriteria] = useState<SearchCriteria | null>(defaultCriteria);
+  const [criteria, setCriteria] = useState<SearchCriteria | null>(null);
   const [selectedFlight, setSelectedFlight] = useState<Flight | null>(null);
   const [passenger, setPassenger] = useState({ name: '', email: '', phone: '' });
   const [confirmation, setConfirmation] = useState<Booking | null>(null);

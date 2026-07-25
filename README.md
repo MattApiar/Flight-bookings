@@ -24,8 +24,8 @@ npm run preview    # preview the production build
 
 ## Tabs
 
-- **Book a Flight** &mdash; opens on a sample search (London Heathrow to New York JFK on 30 August 2026)
-  so example flights are visible immediately. Search the mock timetable by origin, destination, date, time of day and
+- **Book a Flight** &mdash; the form is pre-filled with a sample search (London Heathrow to New York JFK
+  on 30 August 2026); results appear once you hit Search. Search the mock timetable by origin, destination, date, time of day and
   passenger count, browse matching flights, and confirm a booking. A random booking reference is
   generated for each new booking.
 - **Manage Booking** &mdash; all bookings grouped by passenger name and sorted by departure date.
