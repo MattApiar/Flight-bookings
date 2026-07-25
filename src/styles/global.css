@@ -494,6 +494,11 @@ h3 {
   text-align: right;
 }
 
+.booking-form {
+  margin-top: 0.75rem;
+  border-left: 3px solid var(--gold);
+}
+
 .empty {
   text-align: center;
   color: var(--muted);

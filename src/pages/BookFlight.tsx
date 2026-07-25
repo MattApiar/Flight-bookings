@@ -86,6 +86,59 @@ export default function BookFlight() {
     setSelectedFlight(null);
   };
 
+  const passengerForm =
+    selectedFlight && criteria ? (
+      <section className="card booking-form">
+        <h2>Passenger details</h2>
+        <p className="muted">
+          Flight {selectedFlight.flightNumber} &middot; {airportLabel(selectedFlight.originCode)} &rarr;{' '}
+          {airportLabel(selectedFlight.destinationCode)} &middot;{' '}
+          {formatDate(selectedFlight.departureDate)} at {selectedFlight.departureTime}
+        </p>
+        <form onSubmit={handleConfirm}>
+          <div className="form-grid">
+            <label className="field">
+              <span>Lead passenger name</span>
+              <input
+                type="text"
+                value={passenger.name}
+                placeholder="Jane Smith"
+                onChange={(e) => setPassenger({ ...passenger, name: e.target.value })}
+              />
+            </label>
+            <label className="field">
+              <span>Email</span>
+              <input
+                type="email"
+                value={passenger.email}
+                placeholder="jane@example.com"
+                onChange={(e) => setPassenger({ ...passenger, email: e.target.value })}
+              />
+            </label>
+            <label className="field">
+              <span>Phone</span>
+              <input
+                type="tel"
+                value={passenger.phone}
+                placeholder="+44 7700 900000"
+                onChange={(e) => setPassenger({ ...passenger, phone: e.target.value })}
+              />
+            </label>
+          </div>
+          {error ? <p className="form-error">{error}</p> : null}
+          <div className="actions">
+            <button type="submit" className="btn btn--primary">
+              Confirm booking &middot; &pound;
+              {(selectedFlight.price * criteria.passengers).toLocaleString()}
+            </button>
+            <button type="button" className="btn btn--ghost" onClick={() => setSelectedFlight(null)}>
+              Cancel
+            </button>
+          </div>
+        </form>
+      </section>
+    ) : null;
+
   return (
     <div className="page">
       <section className="hero">
@@ -120,71 +173,21 @@ export default function BookFlight() {
           ) : (
             <div className="results__list">
               {results.map((flight) => (
-                <FlightCard
-                  key={flight.id}
-                  flight={flight}
-                  passengers={criteria.passengers}
-                  selected={selectedFlight?.id === flight.id}
-                  onSelect={(f) => {
-                    setSelectedFlight(f);
-                    setConfirmation(null);
-                  }}
-                />
+                <div key={flight.id}>
+                  <FlightCard
+                    flight={flight}
+                    passengers={criteria.passengers}
+                    selected={selectedFlight?.id === flight.id}
+                    onSelect={(f) => {
+                      setSelectedFlight(f);
+                      setConfirmation(null);
+                    }}
+                  />
+                  {selectedFlight?.id === flight.id ? passengerForm : null}
+                </div>
               ))}
             </div>
           )}
-        </section>
-      ) : null}
-
-      {selectedFlight && criteria ? (
-        <section className="card booking-form">
-          <h2>Passenger details</h2>
-          <p className="muted">
-            Flight {selectedFlight.flightNumber} &middot;{' '}
-            {airportLabel(selectedFlight.originCode)} &rarr; {airportLabel(selectedFlight.destinationCode)}{' '}
-            &middot; {formatDate(selectedFlight.departureDate)} at {selectedFlight.departureTime}
-          </p>
-          <form onSubmit={handleConfirm}>
-            <div className="form-grid">
-              <label className="field">
-                <span>Lead passenger name</span>
-                <input
-                  type="text"
-                  value={passenger.name}
-                  placeholder="Jane Smith"
-                  onChange={(e) => setPassenger({ ...passenger, name: e.target.value })}
-                />
-              </label>
-              <label className="field">
-                <span>Email</span>
-                <input
-                  type="email"
-                  value={passenger.email}
-                  placeholder="jane@example.com"
-                  onChange={(e) => setPassenger({ ...passenger, email: e.target.value })}
-                />
-              </label>
-              <label className="field">
-                <span>Phone</span>
-                <input
-                  type="tel"
-                  value={passenger.phone}
-                  placeholder="+44 7700 900000"
-                  onChange={(e) => setPassenger({ ...passenger, phone: e.target.value })}
-                />
-              </label>
-            </div>
-            {error ? <p className="form-error">{error}</p> : null}
-            <div className="actions">
-              <button type="submit" className="btn btn--primary">
-                Confirm booking &middot; &pound;
-                {(selectedFlight.price * criteria.passengers).toLocaleString()}
-              </button>
-              <button type="button" className="btn btn--ghost" onClick={() => setSelectedFlight(null)}>
-                Cancel
-              </button>
-            </div>
-          </form>
         </section>
       ) : null}
     </div>
