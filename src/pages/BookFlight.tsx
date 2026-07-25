@@ -23,17 +23,20 @@ const randomSeat = (): string => {
   return `${row}${letter}`;
 };
 
+/** Showcase date used as the default search: it always has a full day of LHR-JFK departures. */
+const FEATURED_DATE = '2026-08-30';
+
 const defaultCriteria: SearchCriteria = {
   origin: 'LHR',
   destination: 'JFK',
-  date: todayIso(),
+  date: FEATURED_DATE >= todayIso() ? FEATURED_DATE : todayIso(),
   timeOfDay: 'any',
   passengers: 1,
 };
 
 export default function BookFlight() {
   const { addBooking } = useBookings();
-  const [criteria, setCriteria] = useState<SearchCriteria | null>(null);
+  const [criteria, setCriteria] = useState<SearchCriteria | null>(defaultCriteria);
   const [selectedFlight, setSelectedFlight] = useState<Flight | null>(null);
   const [passenger, setPassenger] = useState({ name: '', email: '', phone: '' });
   const [confirmation, setConfirmation] = useState<Booking | null>(null);
