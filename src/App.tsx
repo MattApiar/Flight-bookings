@@ -16,7 +16,7 @@ export default function App() {
         </Routes>
       </main>
       <footer className="footer">
-        <p>Skyline Airways &middot; Demo application. All flights, prices and bookings are mock data.</p>
+        <p>Demo application. All flights, prices and bookings are mock data.</p>
       </footer>
     </div>
   );

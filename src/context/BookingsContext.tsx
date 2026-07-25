@@ -4,7 +4,7 @@ import { initialBookings } from '../data/bookings';
 import { flightById } from '../data/flights';
 import type { Booking } from '../types';
 
-const STORAGE_KEY = 'flight-bookings.v2';
+const STORAGE_KEY = 'flight-bookings.v3';
 
 interface BookingsContextValue {
   bookings: Booking[];
@@ -20,7 +20,7 @@ const generateReference = (existing: Booking[]): string => {
   const alphabet = 'ABCDEFGHJKLMNPQRSTUVWXYZ0123456789';
   let reference = '';
   do {
-    reference = 'SKY';
+    reference = 'BK';
     for (let i = 0; i < 4; i += 1) {
       reference += alphabet[Math.floor(Math.random() * alphabet.length)];
     }

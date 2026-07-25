@@ -185,8 +185,7 @@ export const routeTemplates: RouteTemplate[] = [
   },
 ];
 
-const AIRLINE_NAME = 'Skyline Airways';
-const FLIGHT_PREFIX = 'SK';
+const FLIGHT_PREFIX = 'FL';
 
 const aircraftTypes = [
   'Airbus A320neo',
@@ -212,7 +211,7 @@ const isoDate = (offsetDays: number): string => {
   return date.toISOString().slice(0, 10);
 };
 
-/** Small stable hash so airline, price and aircraft stay identical for a given flight id. */
+/** Small stable hash so cabin, price and aircraft stay identical for a given flight id. */
 const hash = (value: string): number => {
   let result = 0;
   for (let i = 0; i < value.length; i += 1) {
@@ -233,7 +232,6 @@ const buildTimetable = (): Flight[] => {
         const cabin = cabins[seed % cabins.length];
         built.push({
           id,
-          airline: AIRLINE_NAME,
           flightNumber: `${FLIGHT_PREFIX}${100 + (seed % 800)}`,
           cabin: cabin.name,
           originCode: route.originCode,

@@ -60,7 +60,7 @@ export default function ManageBooking() {
   return (
     <div className="page">
       <section className="hero hero--compact">
-        <span className="eyebrow">My Skyline</span>
+        <span className="eyebrow">My bookings</span>
         <h1>Your bookings, {currentUser.name.split(' ')[0]}</h1>
         <p>
           {upcomingCount} upcoming trip{upcomingCount === 1 ? '' : 's'} on this account &middot;{' '}
@@ -119,9 +119,7 @@ export default function ManageBooking() {
                     </div>
                     <div>
                       <dt>Flight</dt>
-                      <dd>
-                        {flight.airline} {flight.flightNumber}
-                      </dd>
+                      <dd>{flight.flightNumber}</dd>
                     </div>
                     <div>
                       <dt>Seat</dt>

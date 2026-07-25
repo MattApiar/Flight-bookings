@@ -16,7 +16,7 @@ const pick = (origin: string, destination: string, offsetDays: number): string =
 
 export const initialBookings: Booking[] = [
   {
-    reference: 'SKY4B2C',
+    reference: 'BK4B2C',
     passengerName: currentUser.name,
     email: currentUser.email,
     phone: currentUser.phone,
@@ -26,7 +26,7 @@ export const initialBookings: Booking[] = [
     status: 'Confirmed',
   },
   {
-    reference: 'SKY9X1M',
+    reference: 'BK9X1M',
     passengerName: currentUser.name,
     email: currentUser.email,
     phone: currentUser.phone,
@@ -36,7 +36,7 @@ export const initialBookings: Booking[] = [
     status: 'Confirmed',
   },
   {
-    reference: 'SKY7T5Q',
+    reference: 'BK7T5Q',
     passengerName: currentUser.name,
     email: currentUser.email,
     phone: currentUser.phone,

@@ -14,7 +14,7 @@ export default function FlightCard({ flight, passengers, onSelect, actionLabel =
 
   return (
     <article className={selected ? 'flight-card flight-card--selected' : 'flight-card'}>
-      <div className="flight-card__airline">
+      <div className="flight-card__operator">
         <span className="badge">{flight.cabin}</span>
         <strong className="flight-card__number">{flight.flightNumber}</strong>
         <span className="muted">{flight.aircraft}</span>

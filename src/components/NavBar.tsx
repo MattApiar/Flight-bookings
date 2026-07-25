@@ -15,7 +15,7 @@ export default function NavBar() {
           <span className="brand__mark" aria-hidden="true">
             &#9992;
           </span>
-          <span className="brand__text">Skyline Airways</span>
+          <span className="brand__text">Flight Bookings</span>
         </NavLink>
 
         <button

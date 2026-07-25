@@ -89,12 +89,9 @@ export default function BookFlight() {
   return (
     <div className="page">
       <section className="hero">
-        <span className="eyebrow">Skyline Airways</span>
+        <span className="eyebrow">Book a flight</span>
         <h1>Where would you like to fly?</h1>
-        <p>
-          Signed in as {currentUser.name}. Choose your route and cabin, and we&rsquo;ll take care of
-          the rest.
-        </p>
+        <p>Signed in as {currentUser.name}. Choose your route, date and cabin to see availability.</p>
       </section>
 
       <SearchForm initial={defaultCriteria} onSearch={handleSearch} />
@@ -143,7 +140,7 @@ export default function BookFlight() {
         <section className="card booking-form">
           <h2>Passenger details</h2>
           <p className="muted">
-            {selectedFlight.airline} {selectedFlight.flightNumber} &middot;{' '}
+            Flight {selectedFlight.flightNumber} &middot;{' '}
             {airportLabel(selectedFlight.originCode)} &rarr; {airportLabel(selectedFlight.destinationCode)}{' '}
             &middot; {formatDate(selectedFlight.departureDate)} at {selectedFlight.departureTime}
           </p>

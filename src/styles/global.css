@@ -425,7 +425,7 @@ h3 {
   letter-spacing: 0.08em;
 }
 
-.flight-card__airline {
+.flight-card__operator {
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
